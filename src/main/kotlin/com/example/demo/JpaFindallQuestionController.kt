@@ -19,7 +19,9 @@ class JpaFindallQuestionController(private val platformRepo: PlatformRepo) {
     fun index(): io.micronaut.data.model.Page<LuckPlatformPO> {
         val save=platformRepo.save(LuckPlatformPO(groupId = 1, groupName = "zz"))
         println(save)
+
         val spec= toSpecification<LuckPlatformPO>(save)
+        //org.hibernate.sql.ast.SqlTreeCreationException: Could not locate TableGroup
        val result= platformRepo.findAll(spec, Pageable.from(0, 10))
         return result
     }
